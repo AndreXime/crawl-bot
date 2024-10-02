@@ -4,7 +4,7 @@
   "description": "Um web scraper simples",
   "main": "scrapper.js",
   "scripts": {
-    "start": "node scraper.js"
+    "start": "node menu.js"
   },
   "dependencies": {
     "puppeteer": "^23.5.0"

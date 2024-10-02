@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const readline = require('readline');
 const fs = require('fs');
 
 async function scrapper(link,element, option, gravar) {
@@ -13,14 +12,14 @@ async function scrapper(link,element, option, gravar) {
   
     const textoCompleto = await page.evaluate((element, option) => {
       const el = document.querySelector(element);
-      if (el) {
-        return option === "InnerText" ? el.innerText : el.innerHTML; // Retorna o texto ou HTML baseado na opção
+      if (!el) {
+        return null;
       }
-      return 'Elemento não encontrado';
+      return option === "InnerText" ? el.innerText : el.innerHTML;
     }, element, option);
   
     if (gravar == "N"){
-      console.log(textoCompleto);
+      console.log("\n",textoCompleto);
     }else{
       fs.writeFile('Scrap_Resultado.txt', textoCompleto, (err) => {
         if (err) {
@@ -33,38 +32,11 @@ async function scrapper(link,element, option, gravar) {
   
     
   } catch (error) {
-    console.log("\nProvalvemente esse site tem alguma proteção contra scrap\n")
+    console.log("\nAconteceu um erro:\n",error.message,"\n");
   } finally{
     await browser.close();
   }
 
 }
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-
-function pergunta(question) {
-  return new Promise((resolve) => {
-    rl.question(question, (answer) => {
-      resolve(answer); // Resolve a Promise com a resposta do usuário
-    });
-  });
-}
-
-async function main() {
-  const link = await pergunta('URL do site: \n--> ');
-  const element = await pergunta('Elemento do site, exemplo: body, .title\n--> ');
-  const gravar = await pergunta('Gravar em arquivo isso vai sobrescrever o arquivo anterior? (S/N) \n--> ');
-  const option = await pergunta("Opções: InnerText - Retorna somente o texto\n        InnerHtml - Retorna todo html do elemento\n--> ")
-
-  if (!link || !element || (gravar !== "S" && gravar !== "N" ) ||(option !== "InnerText" && option !== "InnerHtml")) {
-    console.log('Inputs invalidos');
-    rl.close();
-    process.exit(1);
-  }
-
-  // Chama a função com os inputs fornecidos
-  await scrapper(link, element, option, gravar);
-  rl.close();
-}
-
-main();
+module.exports = { scrapper };
