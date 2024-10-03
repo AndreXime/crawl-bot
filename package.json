@@ -4,9 +4,10 @@
   "description": "Um web scraper simples",
   "main": "scrapper.js",
   "scripts": {
-    "start": "node menu.js"
+    "start": "node main/menu.js"
   },
   "dependencies": {
-    "puppeteer": "^23.5.0"
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
