@@ -5,7 +5,7 @@ const {salvar} = require('./save_file');
 async function scrapper(link,element, option, gravar) {
   puppeteer.use(StealthPlugin());
   const browser = await puppeteer.launch({ 
-      headless: false, 
+      headless: true, 
       args: ['--disable-web-security', '--no-sandbox', '--disable-setuid-sandbox'] 
     });
   const page = await browser.newPage();
@@ -18,19 +18,16 @@ async function scrapper(link,element, option, gravar) {
     const dataExctrated = await page.evaluate((element, option) => {
     const elements = document.querySelectorAll(element);  
     return Array.from(elements).map(el => {
-      if(option === "text"){
-        return el.innerText
+      switch (option) {
+        case 'text':
+          return el.innerText;
+        case 'src':
+          return el.src;
+        case 'href':
+          return el.href;
+        default:
+          return el.outerHTML;
       }
-
-      if(option === "src"){
-        return el.src
-      }
-
-      if(option === "href"){
-        return el.href
-      }
-
-      return el.outerHTML;
     });
     }, element, option);
     
@@ -43,7 +40,6 @@ async function scrapper(link,element, option, gravar) {
   } finally {
     await browser.close();
   }
-
 }
 
 module.exports = { scrapper };
