@@ -1,18 +1,21 @@
 const fs = require('fs');
 
-function salvar(dataExctrated,gravar){
-  const resultadoFinal = dataExctrated.join('')
-    if (gravar == "N"){
-      console.log("\n", resultadoFinal);
-    }else{
-      fs.writeFile('Scrap_Resultado.txt', resultadoFinal, (err) => {
-        if (err) {
-          console.error('Erro ao gravar o arquivo:', err);
-        } else {
-          console.log('Texto gravado em Scrap_Resultado.txt com sucesso!');
-        }
-      });
-    }      
+function gerarNome(arg) {
+  if (arg != "S") {
+    return 0;
+  }
+  const data = new Date();
+  const ano = data.getFullYear();
+  const mes = String(data.getMonth() + 1).padStart(2, "0"); // Mês começa do zero
+  const dia = String(data.getDate()).padStart(2, "0");
+  fs.writeFile(`${ano}-${mes}-${dia}` + ".txt", " ", () => { });
+  
+  return `${ano}-${mes}-${dia}`;
 }
 
-module.exports = { salvar };
+
+function salvarArquivo(dataExctrated,nome){
+    fs.appendFile(nome + ".txt", dataExctrated.join("\n"), () => { }); 
+}
+
+module.exports = { salvarArquivo, gerarNome };
