@@ -6,4 +6,4 @@ npm install
 npm start
 ```
 # Interface
-<img height="230" width="1000" src="https://github.com/user-attachments/assets/608ff194-2c04-4f12-8a02-b1110a0d28e1">
+<img height="230" width="800" src="https://github.com/user-attachments/assets/a07d4510-a93c-4685-afde-3cdc1c9cff47" >
