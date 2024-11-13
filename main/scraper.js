@@ -20,13 +20,12 @@ async function config() {
   return {page, browser};
 }
 
-async function scrapper(link, gravar, maxDepth) {
+async function Crawller(link, gravar, maxDepth) {
   const { page, browser } = await config();
 
-  const visitedUrls = new Set();
-  const urlsToVisit = [{ url: link, depth: 0 }];
-  const allExtractedLinks = [];
-  const nomeArquivo = gerarNome(gravar);
+  const visitedUrls = new Set(); // Para não revisitar uma url
+  const urlsToVisit = [{ url: link, depth: 0 }]; // Fila de urls para visitar
+  const nomeArquivo = gerarNome(gravar); // Gera o arquivo e nome com base na data
   
   try {
     while (urlsToVisit.length > 0) {
@@ -40,7 +39,7 @@ async function scrapper(link, gravar, maxDepth) {
       visitedUrls.add(url);
 
       try {
-        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
 
         // Extrair todos os links da página atual
         const extractedLinks = await page.evaluate(() => {
@@ -51,9 +50,8 @@ async function scrapper(link, gravar, maxDepth) {
         });
 
         // Armazenar links extraídos e salvar
-        allExtractedLinks.push(...extractedLinks);
         if (gravar == "S") {
-          salvarArquivo(allExtractedLinks,nomeArquivo);
+          salvarArquivo(url, nomeArquivo);
         }
 
         // Adicionar novos links à lista de visitas, incrementando a profundidade
@@ -63,7 +61,7 @@ async function scrapper(link, gravar, maxDepth) {
           }
         });
       } catch (error) {
-        console.log(`Erro ao acessar ${url}: ${error.message}`);
+        console.log(`└──> Error: ${error.message}`);
       }
     }
   } catch (error) {
@@ -74,4 +72,4 @@ async function scrapper(link, gravar, maxDepth) {
   }
 }
 
-module.exports = { scrapper };
+module.exports = { Crawller };

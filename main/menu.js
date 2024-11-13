@@ -1,5 +1,5 @@
 const prompts = require('prompts');
-const { scrapper } = require('./scraper');
+const { Crawller } = require('./scraper');
 
 async function main() {
   const response = await prompts([
@@ -16,7 +16,7 @@ async function main() {
     {
       type: "select",
       name: "gravar",
-      message: "Gravar em arquivo? Isso vai sobrescrever o arquivo anterior",
+      message: "Gravar em arquivo?",
       choices: [
         { title: "Sim", value: "S" },
         { title: "Não", value: "N" },
@@ -33,7 +33,7 @@ async function main() {
   }
 
   // Chama a função com os inputs fornecidos
-  await scrapper(link, gravar, Number(depth));
+  await Crawller(link, gravar, Number(depth));
 }
 
 main().catch(err => {

@@ -18,7 +18,7 @@ function gerarNome(arg) {
 
 
 function salvarArquivo(dataExctrated,nome){
-    fs.appendFile(nome +".txt", dataExctrated.join("\n"), () => { }); 
+    fs.appendFile(nome + ".txt", `${dataExctrated}+\n`, () => {}); 
 }
 
 module.exports = { salvarArquivo, gerarNome };
