@@ -2,6 +2,9 @@ const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const { salvarArquivo, gerarNome } = require("./save_file");
 
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
 
 async function config() {
   puppeteer.use(StealthPlugin());
@@ -41,12 +44,24 @@ async function Crawller(link, gravar, maxDepth) {
       try {
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
 
+        await delay(Math.random() * 2000); // Delay entre 0 a 2 segundos
+
+        const pageData = await page.evaluate(() => {
+          const title = document.title;
+          return { title };
+        });
+
+        // Se achar titulo faz console.log
+        pageData.title && console.log(`Título: ${pageData.title}\n`);
+
         // Extrair todos os links da página atual
         const extractedLinks = await page.evaluate(() => {
           const elements = document.querySelectorAll("a");
+          const isMediaLink = (url) => url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".mp4");
+
           return Array.from(elements)
             .map((el) => el.href)
-            .filter((href) => href.startsWith("http"));
+            .filter((href) => href && (href.startsWith("https") || isMediaLink(href)))
         });
 
         // Armazenar links extraídos e salvar
