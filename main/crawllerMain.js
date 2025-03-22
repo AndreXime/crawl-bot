@@ -21,13 +21,13 @@ export default async function Crawller(link, gravar, maxDepth, target) {
 			try {
 				await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
 
-				// Delay entre 0 a 4 segundos
-				await (async () => new Promise((resolve) => setTimeout(resolve, Math.random() * 4000)))();
+				// Delay entre 1 a 5 segundos
+				await (async () => new Promise((resolve) => setTimeout(resolve, 1 + Math.random() * 4000)))();
 
 				// Analise da pagina atual
 				const pageData = await ExtractData(page, target);
 
-				// Mostra no terminal os dados encontrados
+				// Mostra no terminal os dados encontrados e retorna para salvar
 				const readableData = printData(pageData);
 
 				// Salva os dados extraídos

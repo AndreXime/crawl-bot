@@ -19,10 +19,16 @@ async function main() {
 			message: 'Buscar algo especifico?',
 			choices: [
 				{ title: 'Somente pecorrer', value: 'default' },
-				{ title: 'Url de imagem', value: 'imagem' },
+				{ title: 'URL de imagem', value: 'imagem' },
 				{ title: 'Texto', value: 'texto' },
 				{ title: 'Metadata', value: 'metadata' },
+				{ title: 'Custom', value: 'custom' },
 			],
+		},
+		{
+			type: (prev) => (prev === 'custom' ? 'text' : null),
+			name: 'target',
+			message: 'Digite um seletor CSS para buscar',
 		},
 		{
 			type: 'select',
