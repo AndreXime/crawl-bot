@@ -5,11 +5,15 @@
 	"main": "crawllerMenu.js",
 	"type": "module",
 	"scripts": {
-		"start": "node main/crawllerMenu.js"
+		"start": "node main/crawllerMenu.js",
+		"start-web": "node web/server.js"
 	},
 	"dependencies": {
+		"express": "^5.1.0",
 		"prompts": "^2.4.2",
 		"puppeteer-extra": "^3.3.6",
-		"puppeteer-extra-plugin-stealth": "^2.11.2"
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
+		"strip-ansi": "^7.1.0",
+		"ws": "^8.18.1"
 	}
 }

@@ -2,6 +2,11 @@ export default async function ExtractData(page, target) {
 	return await page.evaluate(async (target) => {
 		let data = { Titulo: document.title };
 
+		// valor q significa só percorrer o site
+		if (target == 'default') {
+			return data;
+		}
+
 		switch (target) {
 			case 'texto': {
 				const tags = ['h1', 'h2', 'h3', 'h4', 'p', 'span', 'div'];
@@ -17,6 +22,7 @@ export default async function ExtractData(page, target) {
 						}
 					});
 				});
+				break;
 			}
 
 			case 'imagem': {
@@ -24,6 +30,7 @@ export default async function ExtractData(page, target) {
 					src: img.src,
 					alt: img.alt || 'Sem descrição',
 				}));
+				break;
 			}
 
 			case 'metadata': {
@@ -34,6 +41,7 @@ export default async function ExtractData(page, target) {
 						return name ? { name, content } : null;
 					})
 					.filter((value) => !!value);
+				break;
 			}
 
 			default: {
@@ -41,6 +49,7 @@ export default async function ExtractData(page, target) {
 					.map((elemento) => elemento.textContent?.trim())
 					.filter((text) => text !== '')
 					.map((text) => ({ text }));
+				break;
 			}
 		}
 
