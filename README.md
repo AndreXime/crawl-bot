@@ -11,5 +11,6 @@ cd CrawlBot
 npm install && npm start
 ```
 
+
 ## Interface
-![render1742316058881](https://github.com/user-attachments/assets/1e6c3401-1eca-4457-9d65-5a1ed92f8fb9)
+<img src="https://github.com/user-attachments/assets/f5a918cf-68e1-48b5-90f9-1448c0a115e3" width=800 height=500>
