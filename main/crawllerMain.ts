@@ -3,7 +3,7 @@ import ExtractData from './extractData.js';
 import printData from './printData.js';
 import salvarArquivo from './saveData.js';
 
-export default async function Crawller(link, gravar, maxDepth, target) {
+export default async function Crawller(link: string, gravar: string, maxDepth: number, target: string) {
 	const { page, browser } = await Config();
 
 	const visitedUrls = new Set(); // Para não revisitar uma url
@@ -25,23 +25,13 @@ export default async function Crawller(link, gravar, maxDepth, target) {
 				await (async () => new Promise((resolve) => setTimeout(resolve, 1 + Math.random() * 4000)))();
 
 				// Analise da pagina atual
-				const pageData = await ExtractData(page, target);
+				const { data, extractedLinks } = await ExtractData(page, target);
 
 				// Mostra no terminal os dados encontrados e retorna para salvar
-				const readableData = printData(pageData);
+				const readableData = printData(data);
 
 				// Salva os dados extraídos
 				if (gravar) salvarArquivo(readableData);
-
-				// Extrair todos os links da página atual
-				const extractedLinks = await page.evaluate(() => {
-					const elements = document.querySelectorAll('a');
-					const isMediaLink = (url) => url.endsWith('.jpg') || url.endsWith('.png') || url.endsWith('.mp4');
-
-					return Array.from(elements)
-						.map((el) => el.href)
-						.filter((href) => href && href.startsWith('https') && !isMediaLink(href) && !href.includes('#'));
-				});
 
 				// Adicionar novos links à lista de visitas, aumentando a profundidade
 				extractedLinks.forEach((link) => {
@@ -50,7 +40,7 @@ export default async function Crawller(link, gravar, maxDepth, target) {
 					}
 				});
 			} catch (error) {
-				console.error(`└──> Error: ${error.message}`);
+				console.error(`└──> Error: ${error}`);
 			}
 		}
 	} catch (error) {

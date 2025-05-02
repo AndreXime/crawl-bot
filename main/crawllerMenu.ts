@@ -4,10 +4,10 @@ import Crawller from './crawllerMain.js';
 async function main() {
 	const hasArgs = process.argv.length > 2 || process.env.LINK;
 
-	let link;
-	let depth;
-	let target;
-	let gravar;
+	let link: string;
+	let depth: number;
+	let target: string;
+	let gravar: string;
 
 	// Pega dados via argumento ou env
 	if (hasArgs) {

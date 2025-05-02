@@ -1,7 +1,7 @@
 import express from 'express';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
-import { spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import path from 'path';
 import stripAnsi from 'strip-ansi';
 
@@ -20,10 +20,10 @@ app.get('/', (_, res) => {
 wss.on('connection', (ws) => {
 	console.log('Cliente conectado');
 
-	let child = null;
-	let args = [];
+	let child: ChildProcessWithoutNullStreams | null = null;
+	let args: string[] = [];
 
-	ws.on('message', (msg) => {
+	ws.on('message', (msg: string) => {
 		const input = msg.toString().trim();
 
 		// Primeira mensagem: inicializa o processo com os args

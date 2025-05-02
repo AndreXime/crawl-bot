@@ -2,7 +2,7 @@ import { appendFile } from 'fs';
 
 let nomeArquivo = '';
 
-export default function salvarArquivo(dataExctrated) {
+export default function salvarArquivo(dataExctrated: string) {
 	if (nomeArquivo == '') {
 		nomeArquivo = String(
 			new Date()

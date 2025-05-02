@@ -1,4 +1,7 @@
-function formartarStrings(str) {
+import { DataType } from './type';
+
+function formartarStrings(str: unknown) {
+	if (typeof str !== 'string') return '';
 	return str
 		.split('\n') // Divide a string de suas linhas
 		.map((line) => line.trim())
@@ -6,10 +9,10 @@ function formartarStrings(str) {
 		.join('\n');
 }
 
-export default function printData(data) {
+export default function printData(data: DataType) {
 	let output = '';
-
-	for (const [key, value] of Object.entries(data)) {
+	for (const key of Object.keys(data) as Array<keyof DataType>) {
+		const value = data[key];
 		output += `${key}:\n`;
 
 		if (Array.isArray(value)) {
@@ -19,13 +22,17 @@ export default function printData(data) {
 					output += `    ${subKey}: ${formartarStrings(subValue)}\n`;
 				}
 			});
-		} else if (typeof value === 'object' && value !== null) {
+			continue;
+		}
+
+		if (typeof value === 'object' && value !== null) {
 			for (const [subKey, subValue] of Object.entries(value)) {
 				output += `  ${subKey}: ${formartarStrings(subValue)}\n`;
 			}
-		} else {
-			output += `  ${formartarStrings(value)}\n`;
+			continue;
 		}
+
+		output += `  ${formartarStrings(value)}\n`;
 	}
 
 	console.info(output);
