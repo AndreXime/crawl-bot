@@ -1,25 +1,19 @@
 {
-	"name": "scrapper",
-	"version": "1.5.0",
-	"description": "Um web scraper simples",
-	"main": "crawllerMenu.js",
-	"type": "module",
-	"scripts": {
-		"start": "npx tsx main/crawllerMenu.js",
-		"web": "npx tsx web/server.js"
-	},
-	"dependencies": {
-		"express": "^5.1.0",
-		"prompts": "^2.4.2",
-		"puppeteer-extra": "^3.3.6",
-		"puppeteer-extra-plugin-stealth": "^2.11.2",
-		"strip-ansi": "^7.1.0",
-		"tsx": "^4.19.4",
-		"ws": "^8.18.1"
-	},
-	"devDependencies": {
-		"@types/express": "^5.0.1",
-		"@types/prompts": "^2.4.9",
-		"@types/ws": "^8.18.1"
-	}
+  "name": "scrapper",
+  "version": "1.5.0",
+  "description": "Um web scraper simples",
+  "main": "crawllerMenu.ts",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx main/crawllerMenu.ts"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "^133.0.0",
+    "playwright-core": "^1.52.0",
+    "prompts": "^2.4.2",
+    "tsx": "^4.19.4"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.9"
+  }
 }
