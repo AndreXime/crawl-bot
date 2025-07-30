@@ -14,4 +14,6 @@ npm install && npm start
 
 ## Interface
 
-<img src="https://github.com/user-attachments/assets/f5a918cf-68e1-48b5-90f9-1448c0a115e3" width=800 height=500>
+https://github.com/user-attachments/assets/fb82fcf0-6146-4778-af99-892dd31d6a8a
+
+
