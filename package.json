@@ -1,19 +1,19 @@
 {
-  "name": "scrapper",
-  "version": "1.5.0",
-  "description": "Um web scraper simples",
-  "main": "crawllerMenu.ts",
-  "type": "module",
-  "scripts": {
-    "start": "npx tsx main/crawllerMenu.ts"
-  },
-  "dependencies": {
-    "@sparticuz/chromium": "^133.0.0",
-    "playwright-core": "^1.52.0",
-    "prompts": "^2.4.2",
-    "tsx": "^4.19.4"
-  },
-  "devDependencies": {
-    "@types/prompts": "^2.4.9"
-  }
+    "name": "crawl-bot",
+    "version": "2.0.0",
+    "description": "Um web scraper simples",
+    "main": "crawllerMenu.ts",
+    "type": "module",
+    "scripts": {
+        "start": "npx tsx main/crawllerMenu.ts"
+    },
+    "dependencies": {
+        "@sparticuz/chromium": "^138.0.2",
+        "playwright-core": "^1.54.1",
+        "prompts": "^2.4.2",
+        "tsx": "^4.20.3"
+    },
+    "devDependencies": {
+        "@types/prompts": "^2.4.9"
+    }
 }

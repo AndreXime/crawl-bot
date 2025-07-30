@@ -1,14 +1,14 @@
 {
-  "compilerOptions": {
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "target": "ES2022",
-    "jsx": "react-jsx",
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "allowJs": true,
-    "checkJs": true
-  },
-  "exclude": ["node_modules", "**/node_modules/*"]
+    "compilerOptions": {
+        "noEmit": true,
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "target": "ES2022",
+        "jsx": "react-jsx",
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "allowJs": true,
+        "checkJs": true
+    },
+    "exclude": ["node_modules", "**/node_modules/*"]
 }
